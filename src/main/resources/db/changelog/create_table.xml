@@ -1,0 +1,143 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                   http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="Alex Zhang" id="1587302913106-1">
+        <createTable tableName="mentor_calendar">
+            <column name="TRAN_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="USER_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="START_DATE" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="END_DATE" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alex Zhang" id="1587302913106-2">
+        <createTable tableName="mentor_skills">
+            <column name="USER_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="TECH_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alex Zhang" id="1587302913106-3">
+        <createTable tableName="payments">
+            <column autoIncrement="true" name="PAY_ID" type="INT">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="STUDENT_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MENTOR_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TRAIN_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alex Zhang" id="1587302913106-4">
+        <createTable tableName="technologies">
+            <column autoIncrement="true" name="TECH_ID" type="INT">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="TECH_NAME" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TYPE" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACTIVE" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alex Zhang" id="1587302913106-5">
+        <createTable tableName="trainings">
+            <column autoIncrement="true" name="TRAIN_ID" type="INT">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="TECH_NAME" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="START_DATE" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="END_DATE" type="date"/>
+            <column name="STUDENT_NAME" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MENTOR_NAME" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RECEIVED" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACTIVE" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE" type="INT(5)">
+            </column>
+            <column name="CURRENT_PRICE" type="INT(5)">
+            </column>
+            <column name="CURRENT_PERCENT" type="INT(3)">
+            </column>
+            <column name="RATE" type="INT(3)">
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alex Zhang" id="1587302913106-6">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="USER_ID" type="INT">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="USER_NAME" type="VARCHAR(20)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ROLE_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACTIVE" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EMAIL" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATE_DATE" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="WORK_TIMING_START" type="date">
+            </column>
+            <column name="WORK_TIMING_END" type="date">
+            </column>
+            <column name="LINKEDIN_URL" type="VARCHAR(45)">
+            </column>
+            <column name="MENTOR_PROFILE" type="VARCHAR(45)">
+            </column>
+            <column name="EXP_YEAR" type="INT(2)">
+            </column>
+
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
