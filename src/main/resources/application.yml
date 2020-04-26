@@ -2,3 +2,8 @@ spring:
   liquibase:
     # 不配置默认会查找'classpath:/db/master.xml'文件
     change-log: 'classpath:/db/changelog/master.xml'
+
+swagger:
+  base-package: com.ibm.sba.controller
+  title: sba spi
+  version: 1.0

@@ -1,9 +1,6 @@
 package com.ibm.sba.domain;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -23,6 +20,7 @@ public class Users {
     private Integer expYear;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "USER_ID")
     public int getUserId() {
         return userId;
