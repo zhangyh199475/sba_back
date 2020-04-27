@@ -12,18 +12,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins="http://localhost:8087")
 public class UsersController {
     @Autowired
     private UsersService usersService;
 
-    @GetMapping("/login")
-    public ResponseEntity<Users> login(String userName){
+    @GetMapping("/login/{userName}")
+    public ResponseEntity<Users> login(@PathVariable String userName){
         Users users = this.usersService.login(userName);
         return new ResponseEntity(users, HttpStatus.OK);
     }
 
     @GetMapping("/getUserByUserId")
-    public ResponseEntity<Users> getUserByUserId(int userId){
+    public ResponseEntity<Users> getUserByUserId(@PathVariable int userId){
         Users users = this.usersService.getUserByUserId(userId);
         return new ResponseEntity(users, HttpStatus.OK);
     }
@@ -35,19 +36,19 @@ public class UsersController {
     }
 
     @PostMapping("/addUser")
-    public ResponseEntity<Users> addUser(Users users){
+    public ResponseEntity<Users> addUser(@RequestBody Users users){
         Users usersNew = this.usersService.addUser(users);
         return new ResponseEntity(usersNew, HttpStatus.OK);
     }
 
     @PutMapping("/updateUser")
-    public ResponseEntity<Users> updateUser(Users users){
+    public ResponseEntity<Users> updateUser(@RequestBody Users users){
         Users usersNew = this.usersService.updateUser(users);
         return new ResponseEntity(usersNew, HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteUser")
-    public ResponseEntity<Users> deleteUser(int userId){
+    public ResponseEntity<Users> deleteUser(@PathVariable int userId){
         Users users = this.usersService.deleteUser(userId);
         return new ResponseEntity(users, HttpStatus.OK);
     }
