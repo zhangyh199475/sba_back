@@ -6,9 +6,7 @@ import com.ibm.sba.service.TrainingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +26,22 @@ public class TrainingsController {
     public ResponseEntity<Trainings> searchCompletedTrainings(){
         List<Trainings> trainingsList = this.trainingsService.searchCompletedTrainings();
         return new ResponseEntity(trainingsList, HttpStatus.OK);
+    }
+
+    @GetMapping("/searchTrainingsByUserName")
+    public ResponseEntity<Integer> searchTrainingsByUserName(String userName){
+        return new ResponseEntity(this.trainingsService.searchTrainingsByUserName(userName), HttpStatus.OK);
+    }
+
+    @PostMapping("/addTraining")
+    public ResponseEntity<HttpStatus> addTraining(Trainings trainings){
+        this.trainingsService.addTraining(trainings);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PutMapping("/updateTraining")
+    public ResponseEntity<HttpStatus> updateTraining(Trainings trainings){
+        this.trainingsService.updateTraining(trainings);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

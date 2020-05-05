@@ -4,12 +4,11 @@ import com.ibm.sba.domain.Technologies;
 import com.ibm.sba.domain.TechnologiesCriteria;
 import com.ibm.sba.domain.Users;
 import com.ibm.sba.service.TechnologiesService;
+import com.ibm.sba.service.TrainingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,8 +25,26 @@ public class TechnologiesController {
     }
 
     @GetMapping("/searchTechnologies")
-    public ResponseEntity<TechnologiesCriteria> searchTechnologies(){
+    public ResponseEntity<Technologies> searchTechnologies(){
         List<Technologies> technologiesList = this.technologiesService.searchTechnologies();
         return new ResponseEntity(technologiesList, HttpStatus.OK);
+    }
+
+    @PostMapping("/addTechnologies")
+    public ResponseEntity<Technologies> addTechnologies(@RequestBody Technologies technologies){
+        this.technologiesService.addTechnologies(technologies);
+        return new ResponseEntity(technologies, HttpStatus.OK);
+    }
+
+    @PutMapping("/updateTechnologies")
+    public ResponseEntity<Technologies> updateTechnologies(@RequestBody Technologies technologies){
+        this.technologiesService.updateTechnologies(technologies);
+        return new ResponseEntity(technologies, HttpStatus.OK);
+    }
+
+    @PostMapping("/addTechnologies/{techId}")
+    public ResponseEntity<Technologies> addTechnologies(@PathVariable int techId){
+        Technologies technologies = this.technologiesService.deleteTechnologies(techId);
+        return new ResponseEntity(technologies, HttpStatus.OK);
     }
 }

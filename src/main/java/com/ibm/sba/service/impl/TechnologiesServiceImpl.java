@@ -43,6 +43,30 @@ public class TechnologiesServiceImpl implements TechnologiesService {
         return technologiesList;
     }
 
+    @Override
+    public Technologies addTechnologies(Technologies technologies) {
+        this.technologiesRepository.save(technologies);
+        return technologies;
+    }
+
+    @Override
+    public Technologies updateTechnologies(Technologies technologies) {
+        Technologies technologiesNew = this.technologiesRepository.findById(technologies.getTechId()).orElse(null);
+        technologiesNew.setTechName(technologies.getTechName());
+        technologiesNew.setType(technologies.getType());
+        technologiesNew.setPrice(technologies.getPrice());
+        this.technologiesRepository.save(technologiesNew);
+        return technologiesNew;
+    }
+
+    @Override
+    public Technologies deleteTechnologies(int techId) {
+        Technologies technologies = this.technologiesRepository.findById(techId).orElse(null);
+        technologies.setActive(0);
+        this.technologiesRepository.save(technologies);
+        return technologies;
+    }
+
     private List<TechnologiesCriteria> transformList(List<Object[]> list){
         List<TechnologiesCriteria> technologiesCriteriaList = new ArrayList<>();
         list.forEach(objects -> {

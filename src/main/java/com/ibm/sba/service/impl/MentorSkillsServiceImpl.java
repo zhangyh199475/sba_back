@@ -1,9 +1,12 @@
 package com.ibm.sba.service.impl;
 
+import com.ibm.sba.domain.MentorSkills;
 import com.ibm.sba.domain.SkillsCriteria;
 import com.ibm.sba.domain.TechnologiesCriteria;
+import com.ibm.sba.repository.MentorSkillsRepository;
 import com.ibm.sba.service.MentorSkillsService;
 import liquibase.util.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -20,6 +23,9 @@ public class MentorSkillsServiceImpl implements MentorSkillsService {
     @PersistenceContext
     private EntityManager em;
 
+    @Autowired
+    private MentorSkillsRepository mentorSkillsRepository;
+
     @Override
     public List<SkillsCriteria> searchSkills() {
         Map<String, Object> params = new HashMap<>();
@@ -30,6 +36,21 @@ public class MentorSkillsServiceImpl implements MentorSkillsService {
         this.setParameters(query, params);
         List<Object[]> list = query.getResultList();
         return transformList(list);
+    }
+
+    @Override
+    public void addSkills(MentorSkills mentorSkills) {
+        this.mentorSkillsRepository.save(mentorSkills);
+    }
+
+    @Override
+    public void updateSkills(MentorSkills mentorSkills) {
+        this.mentorSkillsRepository.save(mentorSkills);
+    }
+
+    @Override
+    public void deleteSkills(MentorSkills mentorSkills) {
+        this.mentorSkillsRepository.delete(mentorSkills);
     }
 
     private List<SkillsCriteria> transformList(List<Object[]> list){

@@ -3,14 +3,11 @@ package com.ibm.sba.service.impl;
 import com.ibm.sba.domain.Trainings;
 import com.ibm.sba.repository.TrainingsRepository;
 import com.ibm.sba.service.TrainingsService;
+import liquibase.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,5 +38,32 @@ public class TrainingsServiceImpl implements TrainingsService {
         };
         List<Trainings> trainingsList = trainingsRepository.findAll(query);
         return trainingsList;
+    }
+
+    @Override
+    public int searchTrainingsByUserName(String userName) {
+        if (StringUtils.isEmpty(String.valueOf(this.trainingsRepository.searchTrainingsByUserName(userName).get(1).getTrainId()))){
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    @Override
+    public void addTraining(Trainings trainings) {
+        trainings.setStartDate(java.sql.Date.valueOf(String.valueOf(new Date())));
+        trainings.setEndDate(java.sql.Date.valueOf(String.valueOf(new Date(10))));
+        trainings.setReceived(0);
+        trainings.setActive("1");
+        trainings.setCurrentPrice(0);
+        trainings.setCurrentPercent(0);
+        trainings.setRate(0);
+        this.trainingsRepository.save(trainings);
+
+    }
+
+    @Override
+    public void updateTraining(Trainings trainings) {
+        this.trainingsRepository.save(trainings);
     }
 }

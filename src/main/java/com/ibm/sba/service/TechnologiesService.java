@@ -10,4 +10,10 @@ public interface TechnologiesService {
 
     List<Technologies> searchTechnologies();
 
+    Technologies addTechnologies(Technologies technologies);
+
+    Technologies updateTechnologies(Technologies technologies);
+
+    Technologies deleteTechnologies(int techId);
+
 }

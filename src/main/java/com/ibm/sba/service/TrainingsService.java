@@ -8,4 +8,10 @@ public interface TrainingsService {
     List<Trainings> searchCurrentTrainings();
 
     List<Trainings> searchCompletedTrainings();
+
+    int searchTrainingsByUserName(String userName);
+
+    void addTraining(Trainings trainings);
+
+    void updateTraining(Trainings trainings);
 }

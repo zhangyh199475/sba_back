@@ -47,7 +47,8 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public Users deleteUser(int userId) {
         Users users = this.usersRepository.findById(userId).orElse(null);
-        users.setActive(1);
+        users.setActive(0);
+        this.usersRepository.save(users);
         return users;
     }
 
