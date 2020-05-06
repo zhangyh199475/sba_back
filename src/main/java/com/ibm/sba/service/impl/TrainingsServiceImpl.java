@@ -59,11 +59,19 @@ public class TrainingsServiceImpl implements TrainingsService {
         trainings.setCurrentPercent(0);
         trainings.setRate(0);
         this.trainingsRepository.save(trainings);
-
+        // send email func
+        System.out.println("Email has been sent to mentor!");
     }
 
     @Override
     public void updateTraining(Trainings trainings) {
+        Trainings trainingsNew = this.trainingsRepository.findById(trainings.getTrainId()).orElse(null);
+        if (trainings.getCurrentPrice() > trainingsNew.getCurrentPrice()){
+            // payment func
+            System.out.println("Payment function works!");
+        }
         this.trainingsRepository.save(trainings);
+        // send email func
+        System.out.println("Email has been sent to mentor!");
     }
 }
